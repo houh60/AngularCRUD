@@ -1,0 +1,8 @@
+img {
+  width: 200px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
