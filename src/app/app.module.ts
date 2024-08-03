@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees/list-employees.component';
 import { CreateEmployeesComponent } from './employees/create-employees/create-employees.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,11 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
