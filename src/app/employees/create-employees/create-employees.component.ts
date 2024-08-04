@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-create-employees',
@@ -9,19 +10,25 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrl: './create-employees.component.css'
 })
 export class CreateEmployeesComponent {
-  fullName = '';
-  email = '';
-  phoneNumber = '';
-  gender = '';
-  contactPreference = '';
-  dateOfBirth = null;
-  department = '';
-  isActive = false;
-  photoPath = '';
 
   datepickerConfig: Partial<BsDatepickerConfig>;
-
   previewPhoto = false;
+  defaultSelection = 'select';
+
+  employee: Employee = {
+    id: null,
+    name: null,
+    gender: null,
+    email: null,
+    phoneNumber: null,
+    contactPreference: null,
+    dateOfBirth: null,
+    department: this.defaultSelection,
+    isActive: false,
+    photoPath: null,
+    password: null,
+    confirmPassword: null,
+  }
 
   departments: Department[] = [
     { id: 1, name: 'Help Desk' },
@@ -34,14 +41,11 @@ export class CreateEmployeesComponent {
   constructor() {
     this.datepickerConfig = Object.assign({}, {
       containerClass: 'theme-dark-blue',
-      showWeekNumbers: false,
-      minDate: new Date(2018, 0, 1),
-      maxDate: new Date(2024, 11, 31),
-      dateInputFormat: 'DD/MM/YYYY'
+      showWeekNumbers: false
     })
   }
 
-  saveEmployee(employeeForm: NgForm) {
-    console.log("employeeForm.value: ", employeeForm.value);
+  saveEmployee(newEmployee: Employee) {
+    console.log("newEmployee: ", newEmployee);
   }
 }
