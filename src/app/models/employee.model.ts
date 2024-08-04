@@ -9,6 +9,4 @@ export interface Employee {
   department: string;
   isActive: boolean;
   photoPath?: string;
-  password: string;
-  confirmPassword: string;
 }

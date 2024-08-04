@@ -18,8 +18,6 @@ export class ListEmployeesComponent {
       department: 'IT',
       isActive: true,
       photoPath: 'assets/images/mark.png',
-      password: '',
-      confirmPassword: '',
     },
     {
       id: 2,
@@ -31,8 +29,6 @@ export class ListEmployeesComponent {
       department: 'HR',
       isActive: true,
       photoPath: 'assets/images/mary.png',
-      password: '',
-      confirmPassword: '',
     },
     {
       id: 3,
@@ -44,8 +40,6 @@ export class ListEmployeesComponent {
       department: 'IT',
       isActive: false,
       photoPath: 'assets/images/john.png',
-      password: '',
-      confirmPassword: '',
     },
   ];
 }

@@ -26,8 +26,6 @@ export class CreateEmployeesComponent {
     department: this.defaultSelection,
     isActive: false,
     photoPath: null,
-    password: null,
-    confirmPassword: null,
   }
 
   departments: Department[] = [
