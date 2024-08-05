@@ -48,6 +48,10 @@ export class EmployeeService {
     return this.employees;
   }
 
+  getEmployee(id: number): Employee {
+    return this.employees.find(employee => employee.id === id);
+  }
+
   save(employee: Employee) {
     this.employees.push(employee);
   }

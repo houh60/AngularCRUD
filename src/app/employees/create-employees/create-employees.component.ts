@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
 import * as data from '../../shared/data';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-employees',
@@ -12,6 +13,8 @@ import * as data from '../../shared/data';
   styleUrl: './create-employees.component.css'
 })
 export class CreateEmployeesComponent {
+
+  @ViewChild('employeeForm') public createEmployeeForm: NgForm;
 
   datepickerConfig: Partial<BsDatepickerConfig>;
   previewPhoto = false;
@@ -43,7 +46,9 @@ export class CreateEmployeesComponent {
   }
 
   saveEmployee() {
-    this.employeeService.save(this.employee);
+    const tempEmployee: Employee = Object.assign({}, this.employee);
+    this.employeeService.save(tempEmployee);
+    this.createEmployeeForm.reset();
     this.router.navigate(['/list']);
   }
 }

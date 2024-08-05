@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
-import { Department } from '../../models/department.model';
-import * as data from '../../shared/data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-employees',
@@ -12,11 +11,16 @@ import * as data from '../../shared/data';
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
 
-  departments: Department[] = data.departments;
-
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.employees = this.employeeService.getEmployees();
+  }
+
+  employeeDetails(employeeId: number) {
+    this.router.navigate(['/employees', employeeId]);
   }
 }
