@@ -59,7 +59,26 @@
               Department:
             </div>
             <div class="col-xs-6">
-              {{employee.department}}
+              @switch(employee.department) {
+              @case ("1") {
+              {{departments[0].name}}
+              }
+              @case ("2") {
+              {{departments[1].name}}
+              }
+              @case ("3") {
+              {{departments[2].name}}
+              }
+              @case ("4") {
+              {{departments[3].name}}
+              }
+              @case ("5") {
+              {{departments[4].name}}
+              }
+              @default {
+              N/A
+              }
+              }
             </div>
           </div>
 
