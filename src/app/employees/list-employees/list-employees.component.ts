@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-employees',
@@ -23,12 +23,20 @@ export class ListEmployeesComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.employees = this.employeeService.getEmployees();
-    this.filteredEmployees = this.employees;
+    this.employeeService.getEmployees().subscribe(employees => {
+      this.employees = employees;
+      this.filteredEmployees = this.employees;
+      if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+        this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+      } else {
+        this.filteredEmployees = this.employees;
+      }
+    });
   }
 
   changeEmployeeName() {
@@ -37,10 +45,10 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   employeeDetails(employeeId: number) {
-    this.router.navigate(['/employees', employeeId]);
+    this.router.navigate(['/employees', employeeId], { queryParams: { 'searchTerm': this.searchTerm, 'testParam': 'testValue' } });
   }
 
   filterEmployees(searchString: string): Employee[] {
-    return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+    return this.employees?.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 }
