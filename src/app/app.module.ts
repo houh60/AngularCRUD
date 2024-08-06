@@ -14,6 +14,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { DisplayEmployeeComponent } from './employees/display-employee/display-employee.component';
 import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
 import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
     EmployeeDetailsComponent,
-    EmployeeFilterPipe
+    EmployeeFilterPipe,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

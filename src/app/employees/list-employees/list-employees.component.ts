@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
-import { EmployeeService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -22,21 +21,18 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   constructor(
-    private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.employees = this.route.snapshot.data['employeeList'];
+    if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
+  }
 
   ngOnInit(): void {
-    this.employeeService.getEmployees().subscribe(employees => {
-      this.employees = employees;
-      this.filteredEmployees = this.employees;
-      if (this.route.snapshot.queryParamMap.has('searchTerm')) {
-        this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
-      } else {
-        this.filteredEmployees = this.employees;
-      }
-    });
   }
 
   changeEmployeeName() {

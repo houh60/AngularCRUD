@@ -12,5 +12,6 @@
   </ul>
 </nav>
 <div class="container">
+  <div *ngIf="showLoadingIndicator" class="spinner"></div>
   <router-outlet></router-outlet>
 </div>
