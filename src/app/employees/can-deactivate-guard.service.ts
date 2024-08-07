@@ -10,7 +10,7 @@ export class CanDeactivateGuardService implements CanDeactivate<CreateEmployeesC
   constructor() {}
 
   canDeactivate(component: CreateEmployeesComponent): boolean {
-    if (component.createEmployeeForm.touched && component.createEmployeeForm.dirty) {
+    if (component.createEmployeeForm.dirty) {
       return confirm('Are you sure you want to discard your changes?');
     }
     return true;

@@ -42,4 +42,11 @@ export class ListEmployeesComponent implements OnInit {
   filterEmployees(searchString: string): Employee[] {
     return this.employees?.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
+
+  onDelete(id: number) {
+    const indexDelete = this.filteredEmployees.findIndex(e => e.id = id);
+    if (indexDelete !== -1) {
+      this.filteredEmployees.splice(indexDelete, 1);
+    }
+  }
 }
