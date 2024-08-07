@@ -46,7 +46,7 @@ export class EmployeeService {
   constructor() {}
 
   getEmployees(): Observable<Employee[]> {
-    return of(this.employees).pipe(delay(2000));
+    return of(this.employees).pipe(delay(1000));
   }
 
   getEmployee(id: number): Employee {

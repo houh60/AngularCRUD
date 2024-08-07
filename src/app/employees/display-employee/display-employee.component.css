@@ -6,3 +6,7 @@ img {
   display: flex;
   align-items: center;
 }
+
+button {
+  width: 70px;
+}
