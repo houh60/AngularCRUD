@@ -49,10 +49,8 @@ export class EmployeeService {
     }).pipe(catchError(this.handleError));
   }
 
-  deteleEmployee(id: string) {
-    const indexForDelete = this.employees.findIndex(e => e.id === id);
-    if (indexForDelete !== -1) {
-      this.employees.splice(indexForDelete, 1);
-    }
+  deteleEmployee(id: string): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + id)
+      .pipe(catchError(this.handleError));
   }
 }

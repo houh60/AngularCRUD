@@ -6,18 +6,18 @@
       "gender": "Male",
       "contactPreference": "Email",
       "email": "mark@pragimtech.com",
-      "dateOfBirth": "1988-10-25T05:00:00.000Z",
-      "department": "1",
+      "dateOfBirth": "10/25/1988",
+      "department": "3",
       "isActive": true,
       "photoPath": "assets/images/mark.png"
     },
     {
       "id": "2",
       "name": "Mary",
-      "gender": "Femae",
+      "gender": "Female",
       "contactPreference": "Phone",
       "phoneNumber": "2345978640",
-      "dateOfBirth": "1979-11-20T06:00:00.000Z",
+      "dateOfBirth": "1990-08-04",
       "department": "4",
       "isActive": true,
       "photoPath": "assets/images/mary.png"
@@ -28,7 +28,7 @@
       "gender": "Male",
       "contactPreference": "Phone",
       "phoneNumber": "5432978640",
-      "dateOfBirth": "3/25/1976",
+      "dateOfBirth": "1976-03-25",
       "department": "3",
       "isActive": false,
       "photoPath": "assets/images/john.png"
@@ -40,7 +40,7 @@
       "email": "williamhou38@yahoo.com",
       "phoneNumber": "8562810647",
       "contactPreference": "Email",
-      "dateOfBirth": "2024-08-04T05:00:00.000Z",
+      "dateOfBirth": "2024-08-04",
       "department": "3",
       "isActive": true,
       "photoPath": "assets/images/mark.png"

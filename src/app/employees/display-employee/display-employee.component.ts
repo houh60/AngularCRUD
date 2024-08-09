@@ -37,6 +37,13 @@ export class DisplayEmployeeComponent implements OnInit {
 
   deteleEmployee() {
     if (confirm('Are you sure you want to delete the employee?')) {
+      this.employeeService.deteleEmployee(this.employee.id)
+        .subscribe({
+          next: () => {
+            console.log(`Employee with id of ${this.employee.id} deleted.`);
+          },
+          error: err => console.log('Error: ', err)
+        });
       this.notifyDelete.emit(this.employee.id);
     }
   }
