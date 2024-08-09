@@ -13,9 +13,11 @@ import * as data from '../../shared/data';
 export class EmployeeDetailsComponent implements OnInit {
 
   employee: Employee;
-  private id: number;
+  employees: Employee[];
+  private id: string;
 
   departments: Department[] = data.departments;
+  error: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,19 +26,27 @@ export class EmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const resolvedData: Employee[] = this.route.snapshot.data['employeeList'];
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
+    } else {
+      this.error = resolvedData;
+    }
     this.route.paramMap.subscribe(params => {
-      this.id = +params.get('id')
-      this.employee = this.employeeService.getEmployee(this.id);
+      this.id = params.get('id')
+      this.employeeService.getEmployee(this.id).subscribe(employee => this.employee = employee);
     });
   }
 
   viewNextEmployee() {
-    if (this.id < 3) {
-      this.id = this.id + 1;
+    let findIndex = this.employees.findIndex(e => e.id === this.employee.id);
+    if (findIndex < this.employees.length - 1) {
+      findIndex = findIndex + 1;
     } else {
-      this.id = 1;
+      findIndex = 0;
     }
-    this.router.navigate(['employees', this.id], { queryParamsHandling: 'preserve' })
+    const id = this.employees[findIndex].id;
+    this.router.navigate(['employees', id], { queryParamsHandling: 'preserve' })
   }
 
 }

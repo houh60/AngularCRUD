@@ -26,11 +26,11 @@ export class ListEmployeesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    const resolvedEmployeeList: ResolvedEmployeeList = this.route.snapshot.data['employeeList'];
-    if (resolvedEmployeeList.employeelist !== null) {
-      this.employees = resolvedEmployeeList.employeelist;
+    const resolvedData: Employee[] = this.route.snapshot.data['employeeList'];
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
     } else {
-      this.error = resolvedEmployeeList.error;
+      this.error = resolvedData;
     }
     if (this.route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
@@ -42,7 +42,7 @@ export class ListEmployeesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  employeeDetails(employeeId: number) {
+  employeeDetails(employeeId: string) {
     this.router.navigate(['/employees', employeeId], { queryParams: { 'searchTerm': this.searchTerm } });
   }
 
@@ -50,7 +50,7 @@ export class ListEmployeesComponent implements OnInit {
     return this.employees?.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
-  onDelete(id: number) {
+  onDelete(id: string) {
     const indexDelete = this.filteredEmployees.findIndex(e => e.id = id);
     if (indexDelete !== -1) {
       this.filteredEmployees.splice(indexDelete, 1);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { Observable, catchError, of, pipe, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class EmployeeService {
   ) {}
 
   getEmployees(): Observable<Employee[] | Error> {
-    return this.http.get<Employee[]>('http://localhost:3000/employees1').pipe(catchError(this.handleError));
+    return this.http.get<Employee[]>('http://localhost:3000/employees').pipe(catchError(this.handleError));
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
@@ -27,24 +27,26 @@ export class EmployeeService {
     return throwError(() => new Error('There is a problem with the service. We are notified and working on it. Please try again later.'));
   }
 
-  getEmployee(id: number): Employee {
-    return this.employees.find(employee => employee.id === id);
+  getEmployee(id: string): Observable<Employee> {
+    return this.http.get<Employee>('http://localhost:3000/employees/' + id);
   }
 
   save(employee: Employee) {
     if (employee.id === null) {
-      const maxId = this.employees.reduce((e1, e2) => {
-        return (e1.id > e2.id) ? e1 : e2;
-      }).id;
-      employee.id = maxId + 1;
-      this.employees.push(employee);
+      employee.id = '' + new Date().getTime()
+      return this.http.post<Employee>('http://localhost:3000/employees', employee, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(catchError(this.handleError));
     } else {
       const foundIndex = +this.employees.findIndex(e => e.id === employee.id);
       this.employees[foundIndex] = employee;
+      return of(employee);
     }
   }
 
-  deteleEmployee(id: number) {
+  deteleEmployee(id: string) {
     const indexForDelete = this.employees.findIndex(e => e.id === id);
     if (indexForDelete !== -1) {
       this.employees.splice(indexForDelete, 1);

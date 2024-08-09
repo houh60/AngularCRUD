@@ -49,13 +49,13 @@ export class CreateEmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(parameterMap => {
-      const id = +parameterMap.get('id');
+      const id = parameterMap.get('id');
       this.getEmployee(id);
     })
   }
 
-  getEmployee(id: number) {
-    if (id === 0) {
+  getEmployee(id: string) {
+    if (id === '0') {
       this.employee = {
         id: null,
         name: null,
@@ -72,14 +72,17 @@ export class CreateEmployeesComponent implements OnInit {
       this.createEmployeeForm?.reset();
     } else {
       this.panelTitle = 'Edit';
-      this.employee = Object.assign({}, this.employeeService.getEmployee(id));
+      // this.employee = Object.assign({}, this.employeeService.getEmployee(id));
     }
   }
 
   saveEmployee() {
-    const tempEmployee: Employee = Object.assign({}, this.employee);
-    this.employeeService.save(tempEmployee);
-    this.createEmployeeForm.reset();
-    this.router.navigate(['/list']);
+    this.employeeService.save(this.employee).subscribe({
+      next: (data: Employee) => {
+        this.createEmployeeForm.reset();
+        this.router.navigate(['/list']);
+      },
+      error: (error: any) => console.log('error', error)
+    });
   }
 }

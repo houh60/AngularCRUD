@@ -13,7 +13,7 @@ export class EmployeeDetailsGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const employeeExist = !!this.employeeService.getEmployee(+route.paramMap.get('id'));
+    const employeeExist = !!this.employeeService.getEmployee(route.paramMap.get('id'));
     if (employeeExist) {
       return true;
     } else {

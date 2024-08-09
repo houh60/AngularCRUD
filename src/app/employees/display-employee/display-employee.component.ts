@@ -19,12 +19,12 @@ export class DisplayEmployeeComponent implements OnInit {
 
   departments: Department[] = data.departments;
 
-  selectedEmployeeId: number;
+  selectedEmployeeId: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id')
+    this.selectedEmployeeId = this.route.snapshot.paramMap.get('id')
   }
 
   viewEmployee() {
