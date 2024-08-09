@@ -51,5 +51,4 @@ export class EmployeeDetailsComponent implements OnInit {
     const id = this.employees[findIndex].id;
     this.router.navigate(['employees', id], { queryParamsHandling: 'preserve' })
   }
-
 }

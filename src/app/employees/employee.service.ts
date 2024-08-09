@@ -8,7 +8,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 })
 export class EmployeeService {
 
-  private employees: Employee[] = [];
   baseUrl = 'http://localhost:3000/employees/';
 
   constructor(

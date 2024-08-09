@@ -41,10 +41,10 @@ export class DisplayEmployeeComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log(`Employee with id of ${this.employee.id} deleted.`);
+            this.notifyDelete.emit(this.employee.id);
           },
           error: err => console.log('Error: ', err)
         });
-      this.notifyDelete.emit(this.employee.id);
     }
   }
 
