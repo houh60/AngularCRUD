@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { EmployeeService } from './employee.service';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,21 @@ export class EmployeeDetailsGuardService implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const employeeExist = !!this.employeeService.getEmployee(route.paramMap.get('id'));
-    if (employeeExist) {
-      return true;
-    } else {
-      this.router.navigate(['notfound']);
-      return false;
-    }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.employeeService.getEmployee(route.paramMap.get('id'))
+      .pipe(map(employee => {
+        const employeeExists = !!employee;
+        if (employeeExists) {
+          return true;
+        } else {
+          this.router.navigate(['notfound']);
+          return false;
+        }
+      }),
+        catchError(error => {
+          console.log("error: ", error);
+          return of(error);
+        })
+      );
   }
 }

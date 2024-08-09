@@ -9,13 +9,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 export class EmployeeService {
 
   private employees: Employee[] = [];
+  baseUrl = 'http://localhost:3000/employees/';
 
   constructor(
     private http: HttpClient
   ) {}
 
   getEmployees(): Observable<Employee[] | Error> {
-    return this.http.get<Employee[]>('http://localhost:3000/employees').pipe(catchError(this.handleError));
+    return this.http.get<Employee[]>(this.baseUrl).pipe(catchError(this.handleError));
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
@@ -28,22 +29,24 @@ export class EmployeeService {
   }
 
   getEmployee(id: string): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:3000/employees/' + id);
+    return this.http.get<Employee>(this.baseUrl + id).pipe(catchError(this.handleError));
   }
 
-  save(employee: Employee) {
-    if (employee.id === null) {
-      employee.id = '' + new Date().getTime()
-      return this.http.post<Employee>('http://localhost:3000/employees', employee, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      }).pipe(catchError(this.handleError));
-    } else {
-      const foundIndex = +this.employees.findIndex(e => e.id === employee.id);
-      this.employees[foundIndex] = employee;
-      return of(employee);
-    }
+  addEmployee(employee: Employee) {
+    employee.id = '' + new Date().getTime()
+    return this.http.post<Employee>(this.baseUrl, employee, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(catchError(this.handleError));
+  }
+
+  updateEmployee(employee: Employee): Observable<void> {
+    return this.http.put<void>(this.baseUrl + employee.id, employee, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(catchError(this.handleError));
   }
 
   deteleEmployee(id: string) {

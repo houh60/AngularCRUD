@@ -34,7 +34,10 @@ export class EmployeeDetailsComponent implements OnInit {
     }
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id')
-      this.employeeService.getEmployee(this.id).subscribe(employee => this.employee = employee);
+      this.employeeService.getEmployee(this.id).subscribe({
+        next: employee => this.employee = employee,
+        error: err => console.log('Error: ', err)
+      });
     });
   }
 

@@ -20,6 +20,7 @@ export class CreateEmployeesComponent implements OnInit {
   previewPhoto = false;
   defaultSelection = 'select';
   panelTitle: string;
+  createUpdateEmployee: any;
 
   employee: Employee = {
     id: null,
@@ -72,12 +73,21 @@ export class CreateEmployeesComponent implements OnInit {
       this.createEmployeeForm?.reset();
     } else {
       this.panelTitle = 'Edit';
-      // this.employee = Object.assign({}, this.employeeService.getEmployee(id));
+      this.employeeService.getEmployee(id).subscribe({
+        next: employee => this.employee = employee,
+        error: err => console.log('Error: ', err)
+      });
     }
   }
 
   saveEmployee() {
-    this.employeeService.save(this.employee).subscribe({
+    if (this.employee.id === null) {
+      this.createUpdateEmployee = this.employeeService.addEmployee(this.employee);
+    } else {
+      this.createUpdateEmployee = this.employeeService.updateEmployee(this.employee);
+    }
+
+    this.createUpdateEmployee.subscribe({
       next: (data: Employee) => {
         this.createEmployeeForm.reset();
         this.router.navigate(['/list']);
