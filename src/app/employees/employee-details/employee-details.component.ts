@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../../models/employee.model';
-import { Department } from '../../models/department.model';
-import * as data from '../../shared/data';
 
 @Component({
   selector: 'app-employee-details',
@@ -15,8 +13,6 @@ export class EmployeeDetailsComponent implements OnInit {
   employee: Employee;
   employees: Employee[];
   private id: string;
-
-  departments: Department[] = data.departments;
   error: any;
 
   constructor(

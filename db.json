@@ -7,7 +7,7 @@
       "contactPreference": "Email",
       "email": "mark@pragimtech.com",
       "dateOfBirth": "10/25/1988",
-      "department": "3",
+      "department": "2",
       "isActive": true,
       "photoPath": "assets/images/mark.png"
     },
@@ -18,7 +18,7 @@
       "contactPreference": "Phone",
       "phoneNumber": "2345978640",
       "dateOfBirth": "1990-08-04",
-      "department": "4",
+      "department": "1",
       "isActive": true,
       "photoPath": "assets/images/mary.png"
     },
@@ -41,7 +41,7 @@
       "phoneNumber": "8562810647",
       "contactPreference": "Email",
       "dateOfBirth": "2024-08-04",
-      "department": "3",
+      "department": "5",
       "isActive": true,
       "photoPath": "assets/images/mark.png"
     }

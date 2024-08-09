@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
-import { Department } from '../../models/department.model';
-import * as data from '../../shared/data';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 
@@ -16,8 +14,6 @@ export class DisplayEmployeeComponent implements OnInit {
   @Input() searchTerm: string;
   @Output() notifyDelete = new EventEmitter();
   panelExpanded = true;
-
-  departments: Department[] = data.departments;
 
   selectedEmployeeId: string;
 
