@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResolvedEmployeeList } from '../resolved-employeelist.model';
 
 @Component({
   selector: 'app-list-employees',
@@ -12,6 +13,7 @@ export class ListEmployeesComponent implements OnInit {
   filteredEmployees: Employee[];
 
   private _searchTerm: string;
+  error: any;
   get searchTerm(): string {
     return this._searchTerm;
   };
@@ -24,7 +26,12 @@ export class ListEmployeesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.employees = this.route.snapshot.data['employeeList'];
+    const resolvedEmployeeList: ResolvedEmployeeList = this.route.snapshot.data['employeeList'];
+    if (resolvedEmployeeList.employeelist !== null) {
+      this.employees = resolvedEmployeeList.employeelist;
+    } else {
+      this.error = resolvedEmployeeList.error;
+    }
     if (this.route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     } else {
@@ -36,7 +43,7 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   employeeDetails(employeeId: number) {
-    this.router.navigate(['/employees', employeeId], { queryParams: { 'searchTerm': this.searchTerm, 'testParam': 'testValue' } });
+    this.router.navigate(['/employees', employeeId], { queryParams: { 'searchTerm': this.searchTerm } });
   }
 
   filterEmployees(searchString: string): Employee[] {

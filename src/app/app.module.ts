@@ -15,6 +15,8 @@ import { DisplayEmployeeComponent } from './employees/display-employee/display-e
 import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
 import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AccordionComponent } from './shared/accordion/accordion.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     DisplayEmployeeComponent,
     EmployeeDetailsComponent,
     EmployeeFilterPipe,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     BsDatepickerModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

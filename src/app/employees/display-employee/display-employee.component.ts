@@ -15,6 +15,7 @@ export class DisplayEmployeeComponent implements OnInit {
   @Input() employee: Employee;
   @Input() searchTerm: string;
   @Output() notifyDelete = new EventEmitter();
+  panelExpanded = true;
 
   departments: Department[] = data.departments;
 

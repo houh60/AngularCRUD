@@ -10,3 +10,7 @@ img {
 button {
   width: 70px;
 }
+
+.pointerCursor {
+  cursor: pointer;
+}

@@ -21,9 +21,7 @@ export class EmployeeDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private employeeService: EmployeeService,
     private router: Router
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
