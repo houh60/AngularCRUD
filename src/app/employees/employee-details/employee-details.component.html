@@ -58,13 +58,27 @@
             <div class="col-xs-6">
               Department:
             </div>
-            <div class="col-xs-6" [ngSwitch]="employee.department">
-              <span *ngSwitchCase="'1'">Help Desk</span>
-              <span *ngSwitchCase="'2'">HR</span>
-              <span *ngSwitchCase="'3'">IT</span>
-              <span *ngSwitchCase="'4'">Payroll</span>
-              <span *ngSwitchCase="'5'">Admin</span>
-              <span *ngSwitchDefault>N/A</span>
+            <div class="col-xs-6">
+              @switch (employee.department) {
+              @case ('1') {
+              Help Desk
+              }
+              @case ('2') {
+              HR
+              }
+              @case ('3') {
+              IT
+              }
+              @case ('4') {
+              Payroll
+              }
+              @case ('5') {
+              Admin
+              }
+              @default {
+              N/A
+              }
+              }
             </div>
           </div>
 
