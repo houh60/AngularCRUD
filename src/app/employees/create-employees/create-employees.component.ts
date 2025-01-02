@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Employee } from '../../models/employee.model';
@@ -40,12 +40,17 @@ export class CreateEmployeesComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.datepickerConfig = Object.assign({}, {
       containerClass: 'theme-dark-blue',
       showWeekNumbers: false
     })
+  }
+
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
   }
 
   ngOnInit(): void {

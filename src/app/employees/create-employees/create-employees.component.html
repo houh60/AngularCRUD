@@ -33,7 +33,7 @@
         <label for="email" class="control-label">Email</label>
         <input type="email" id="email" class="form-control" [(ngModel)]="employee.email" name="email"
           [required]="employee.contactPreference == 'Email'" #email="ngModel" email>
-        <span class="help-block" *ngIf="email.touched && email.errors && email.errors['required']">
+        <span class="help-block" *ngIf="email.errors && email.errors['required']">
           Email is required
         </span>
         <span class="help-block" *ngIf="email.errors && email.errors['email'] && email.invalid">
@@ -45,6 +45,9 @@
         <label for="phoneNumber" class="control-label">Phone Number</label>
         <input type="text" id="phoneNumber" class="form-control" [(ngModel)]="employee.phoneNumber" name="phoneNumber"
           [required]="employee.contactPreference == 'Phone'" #phoneNumber="ngModel">
+        <span class="help-block" *ngIf="phoneNumber.errors && phoneNumber.errors['required']">
+          Phone Number is required
+        </span>
       </div>
 
       <div class="form-group" [class.has-error]="gender.touched && gender.invalid">
