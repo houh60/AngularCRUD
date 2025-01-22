@@ -1,89 +1,79 @@
-<app-accordion [title]="employee.name" [hasJustViewed]="selectedEmployeeId === employee.id" [isHidden]="false">
+<app-accordion
+  [title]="employee.name"
+  [hasJustViewed]="selectedEmployeeId === employee.id"
+  [isHidden]="false"
+>
   <div class="col-xs-10 myPanelBody">
     <div class="row vertical-align">
       <div class="col-xs-5">
-        <img [src]="employee.photoPath" [alt]="employee.name">
+        <img [src]="employee.photoPath" [alt]="employee.name" />
       </div>
       <div class="col-xs-7">
         <div class="row">
+          <div class="col-xs-6">Gender:</div>
           <div class="col-xs-6">
-            Gender:
-          </div>
-          <div class="col-xs-6">
-            {{employee.gender}}
+            {{ employee.gender }}
           </div>
         </div>
 
         <div class="row">
+          <div class="col-xs-6">Date of Birth:</div>
           <div class="col-xs-6">
-            Date of Birth:
-          </div>
-          <div class="col-xs-6">
-            {{employee.dateOfBirth | date}}
+            {{ employee.dateOfBirth | date }}
           </div>
         </div>
 
         <div class="row">
+          <div class="col-xs-6">Contact Preference:</div>
           <div class="col-xs-6">
-            Contact Preference:
-          </div>
-          <div class="col-xs-6">
-            {{employee.contactPreference}}
+            {{ employee.contactPreference }}
           </div>
         </div>
 
         <div class="row">
+          <div class="col-xs-6">Email:</div>
           <div class="col-xs-6">
-            Email:
-          </div>
-          <div class="col-xs-6">
-            {{employee.email}}
+            {{ employee.email }}
           </div>
         </div>
 
         <div class="row">
+          <div class="col-xs-6">Phone Number:</div>
           <div class="col-xs-6">
-            Phone Number:
-          </div>
-          <div class="col-xs-6">
-            {{employee.phoneNumber}}
+            {{ employee.phoneNumber }}
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-6">
-            Department:
-          </div>
+          <div class="col-xs-6">Department:</div>
           <div class="col-xs-6">
             @switch (employee.department) {
-            @case ('1') {
-            Help Desk
-            }
-            @case ('2') {
-            HR
-            }
-            @case ('3') {
-            IT
-            }
-            @case ('4') {
-            Payroll
-            }
-            @case ('5') {
-            Admin
-            }
-            @default {
-            N/A
-            }
+              @case ("1") {
+                Help Desk
+              }
+              @case ("2") {
+                HR
+              }
+              @case ("3") {
+                IT
+              }
+              @case ("4") {
+                Payroll
+              }
+              @case ("5") {
+                Admin
+              }
+              @default {
+                N/A
+              }
             }
           </div>
         </div>
 
         <div class="row">
+          <div class="col-xs-6">Is Active:</div>
           <div class="col-xs-6">
-            Is Active:
-          </div>
-          <div class="col-xs-6">
-            {{employee.isActive}}
+            {{ employee.isActive }}
           </div>
         </div>
       </div>
